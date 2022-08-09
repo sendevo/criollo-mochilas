@@ -1,0 +1,48 @@
+.HeaderBlock {
+    margin-top: 10px;
+    line-height: 10px;
+}
+
+.SectionTitle {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.CommentsBlock {
+    margin: 0px 5px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.Table {
+    padding: 0px !important;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.Table td {
+    text-align: left;
+    padding-left: 15px;
+}
+
+.SuppliesTable {
+    margin-top: 10px!important;
+    table-layout:fixed;    
+}
+
+.SuppliesTable td {
+    font-size: 10px;
+}
+
+.SuppliesTable > tr > th{
+    background-color: rgb(200,200,200,0.6);
+    font-size: 10px;
+    text-align: center;
+}
+
+.DataCell {
+    text-align: left;
+    font-size: 90%;
+}

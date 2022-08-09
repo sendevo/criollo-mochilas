@@ -1,0 +1,13 @@
+.Container {
+    position: relative;    
+}
+
+.Select {
+    padding: 2px;    
+}
+
+.SelectIcon {
+    position: absolute;
+    top: 10px;
+    height: 50px;
+}

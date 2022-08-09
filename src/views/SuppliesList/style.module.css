@@ -1,0 +1,23 @@
+.SectionTitle {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+
+.MainTable {
+    table-layout: fixed;
+    margin-top: 20px!important;
+}
+
+.MainTable td{
+    text-align: left;
+    font-size: 12px;
+}
+
+.Card {
+    width:100%; 
+    margin: 0; 
+    border-radius: 5px; 
+    min-height: 70px;    
+}

@@ -1,0 +1,46 @@
+{
+  "name": "criollo-mochilas",
+  "version": "2.0.0",
+  "description": "Criollo mochilas es una app para calculos de aplicacion de agroquimicos con mochila de pulverizacion",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sendevo/criollo-mochilas.git"
+  },
+  "author": "Matias Micheletto",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/sendevo/criollo-mochilas/issues"
+  },
+  "homepage": "https://github.com/sendevo/criollo-mochilas#readme",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@byteowls/capacitor-filesharer": "^3.0.0",
+    "@capacitor-community/keep-awake": "^2.1.1",
+    "@capacitor/android": "^3.3.4",
+    "@capacitor/app": "^1.0.7",
+    "@capacitor/cli": "^3.3.4",
+    "@capacitor/core": "^3.3.4",
+    "@capacitor/filesystem": "^1.0.7",
+    "@capacitor/geolocation": "^1.3.1",
+    "@capacitor/storage": "^1.2.3",
+    "framework7": "^6.3.3",
+    "framework7-react": "^6.3.3",
+    "moment": "^2.29.1",
+    "pdfmake": "^0.2.4",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-icons": "^4.2.0",
+    "react-select": "^5.3.0",    
+    "use-sound": "^4.0.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@vitejs/plugin-react": "^1.3.0",
+    "vite": "^2.9.5"
+  }
+}

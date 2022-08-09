@@ -1,0 +1,28 @@
+.Container {
+    position: relative;    
+    left: 0px!important;       
+}
+
+.Input {
+    padding-left: 10px;    
+}
+
+.Input div {
+    margin-left: 0px!important;            
+}
+
+.UnitLabel {
+    position: absolute;
+    top: 23px;
+    right: 30px;
+    /*right: 45px; (con clearbutton)*/
+    z-index: 999;
+    color: rgb(150,150,150);
+}
+
+.InputIcon {
+    position: absolute;
+    left: 0px;     
+    top: 10px;
+    height: 50px;    
+}
