@@ -82,5 +82,17 @@ $ npx cap open android
 
 ### Backlog
 
-  - [ ] Iconos de ritmo: lento, medio y rapido.  
-  - [ ] Audio de paso.  
+  - [x] Parámetros.  
+    - [x] Cálculo de parámetros.  
+    - [x] Agregado a reporte.  
+  - [ ] Ritmo.  
+    - [ ] Selección de ritmo y reproducción de audio.  
+  - [ ] Insumos.  
+    - [ ] Cálculo de insumos.  
+    - [ ] Agregado a reporte.  
+  - [x] Reportes.  
+    - [x] Creación, eliminación, consulta.  
+    - [ ] Convertir a PDF.  
+  - [ ] Informacion y ayuda.  
+    - [ ] Información acerca de.  
+    - [ ] Modo ayuda.  

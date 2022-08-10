@@ -1,10 +1,10 @@
-import { f7, Navbar, Page, List, BlockTitle, Row, Col, Button } from 'framework7-react';
+import { f7, Navbar, Page, List, Row, Col, Button } from 'framework7-react';
 import { useContext } from 'react';
 import { ReportsDispatchContext } from '../../context/ReportsContext';
 import { ParamsStateContext, ParamsDispatchContext } from '../../context/ParamsContext';
 import { addParams } from '../../entities/Model/reportsActions';
 import { setParamValue } from '../../entities/Model/paramsActions.js';
-import { BackButton, LinkButton } from '../../components/Buttons';
+import { BackButton } from '../../components/Buttons';
 import Input from '../../components/Input';
 import iconDistance from '../../assets/icons/distancia.png';
 import iconWidth from '../../assets/icons/caudal.png';

@@ -30,77 +30,29 @@ const ReportDetails = props => {
                     <table className={classes.Table}>
                         <tbody>                                                        
                             <tr>
-                                <td><b>Distancia entre filas:</b></td>
-                                <td className={classes.DataCell}>{formatNumber(report.params.rowSeparation)} m</td>
+                                <td><b>Distancia recorrida:</b></td>
+                                <td className={classes.DataCell}>{formatNumber(report.params.d)} m</td>
                             </tr>
                             <tr>
-                                <td><b>Cantidad de arcos:</b></td>
-                                <td className={classes.DataCell}>{report.params.arcNumber}</td>
+                                <td><b>Ancho de banda:</b></td>
+                                <td className={classes.DataCell}>{report.params.w} m</td>
                             </tr>
                             <tr>
-                                <td><b>Velocidad de trabajo:</b></td>
-                                <td className={classes.DataCell}>{formatNumber(report.params.workVelocity)} km/h</td>
+                                <td><b>Volumen inicial:</b></td>
+                                <td className={classes.DataCell}>{formatNumber(report.params.Vi)} l</td>
                             </tr>
                             <tr>
-                                <td><b>Presión de trabajo:</b></td>
-                                <td className={classes.DataCell}>{formatNumber(report.params.workPressure)} bar</td>
+                                <td><b>Volumen recolectado:</b></td>
+                                <td className={classes.DataCell}>{formatNumber(report.params.Vf)} l (Gasto: {formatNumber(report.params.Vg)} l)</td>
                             </tr>
                             <tr>
                                 <td><b>Volumen de aplicación:</b></td>
-                                <td className={classes.DataCell}>{formatNumber(report.params.workVolume)} l/ha</td>
-                            </tr>
-                            <tr>
-                                <td><b>Caudal de aire:</b></td>
-                                <td className={classes.DataCell}>{formatNumber(report.params.airFlow)} m³/h</td>
+                                <td className={classes.DataCell}>{formatNumber(report.params.Va)} l/ha</td>
                             </tr>
                         </tbody>
                     </table>
                 </Block>
             }
-            {
-                report.completed.control &&
-                <Block className={classes.SectionBlock}>
-                    <h3>Verificación de picos</h3>
-
-                    <b>Arco derecho</b>
-                    <table className={classes.Table}>
-                        <tbody>
-                            <tr>
-                                <td><b>Volumen efectivo:</b></td>
-                                <td className={classes.DataCell}>{formatNumber(report.control.outputs.right.effectiveSprayVolume)} l/min</td>
-                            </tr>
-                            <tr>
-                                <td><b>Diferencia:</b></td>
-                                <td className={classes.DataCell}>{formatNumber(report.control.outputs.right.diff)} l/min ({formatNumber(report.control.outputs.right.diffp)} %)</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    {
-                        report.control.arcNumber === 2 &&
-                        <>
-                            <br/>
-                            <b>Arco izquierdo</b>
-                            <table className={classes.Table}>
-                                <tbody>
-                                    <tr>
-                                        <td><b>Volumen efectivo:</b></td>
-                                        <td className={classes.DataCell}>{formatNumber(report.control.outputs.left.effectiveSprayVolume)} l/min</td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>Diferencia:</b></td>
-                                        <td className={classes.DataCell}>{formatNumber(report.control.outputs.left.diff)} l/min ({formatNumber(report.control.outputs.left.diffp)} %)</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <NozzlesControlTable 
-                                data={report.control.tableData.left} 
-                                onDataChange={()=>{}} 
-                                rowSelectDisabled={true}
-                                evalCollected={()=>{}}/>
-                        </>
-                    }
-                </Block>
-            }  
             {
                 report.completed.supplies &&
                 <Block className={classes.SectionBlock}>

@@ -1,9 +1,9 @@
 import { Storage } from '@capacitor/storage';
 import { Capacitor } from "@capacitor/core";
 
-const appname = "criollo_atm";
-const version = "3.5";
-const versionKey = "criollo_atm_version";
+const appname = "criollom";
+const version = "2.0";
+const versionKey = "criollom_version";
 
 const storageWrite = (key, value) => { // Guardar datos en localStorage    
     const v = JSON.stringify(value);

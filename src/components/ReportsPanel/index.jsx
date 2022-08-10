@@ -1,6 +1,7 @@
 import { f7, View, Panel, Page, Block, BlockTitle, Button, Row } from 'framework7-react';
 import { useContext } from 'react';
 import moment from 'moment';
+import { ReportsStateContext, ReportsDispatchContext } from '../../context/ReportsContext.jsx';
 import * as actions from '../../entities/Model/reportsActions.js';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 import Toast from '../Toast';
@@ -8,14 +9,10 @@ import classes from './style.module.css';
 
 const ReportsPanel = () => {
     
-    /*
     const state = useContext(ReportsStateContext);
     const dispatch = useContext(ReportsDispatchContext);
-    */
-    const state = {};
-    const dispatch = {};
     
-    const emptyReport = true;
+    const emptyReport = !state.completed.params && !state.completed.supplies;
  
     const saveReport = () => {
         f7.dialog.create({
@@ -94,7 +91,28 @@ const ReportsPanel = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+                                <tr>
+                                        <td>Parámetros de aplicación</td>
+                                        <td className={classes.SectionStatus}>
+                                        {
+                                            state.completed.params ? 
+                                            <FaCheck size={20} color="green"/> 
+                                            : 
+                                            <FaTimes size={20} color="red"/>
+                                        }
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cálculo de mezcla</td>
+                                        <td className={classes.SectionStatus}>
+                                        {
+                                            state.completed.supplies ? 
+                                            <FaCheck size={20} color="green"/> 
+                                            : 
+                                            <FaTimes size={20} color="red"/>
+                                        }
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </Row>

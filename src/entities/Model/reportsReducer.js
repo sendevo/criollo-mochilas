@@ -6,12 +6,10 @@ export const initialState = {
     timestamp: 0,
     name: null,
     comments: "",
-    params: {},
-    control: {},
+    params: {},    
     supplies: {},
     completed: {
-        params: false,
-        control: false,
+        params: false,        
         supplies: false
     }
 };
@@ -25,16 +23,6 @@ export const reducer = (state, action) => {
                 completed: {
                     ...state.completed,
                     params: true
-                }
-            };
-        }   
-        case "ADD_CONTROL": {
-            return {
-                ...state,
-                control: action.payload,
-                completed: {
-                    ...state.completed,
-                    control: true
                 }
             };
         }   
