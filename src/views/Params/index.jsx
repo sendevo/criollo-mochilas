@@ -1,62 +1,116 @@
 import { f7, Navbar, Page, List, BlockTitle, Row, Col, Button } from 'framework7-react';
 import { useContext } from 'react';
-import { BackButton, LinkButton } from '../../components/Buttons';
+import { ReportsDispatchContext } from '../../context/ReportsContext';
+import { ParamsStateContext, ParamsDispatchContext } from '../../context/ParamsContext';
 import { addParams } from '../../entities/Model/reportsActions';
-import * as actions from '../../entities/Model/paramsActions.js';
+import { setParamValue } from '../../entities/Model/paramsActions.js';
+import { BackButton, LinkButton } from '../../components/Buttons';
+import Input from '../../components/Input';
+import iconDistance from '../../assets/icons/distancia.png';
+import iconWidth from '../../assets/icons/caudal.png';
+import iconFull from '../../assets/icons/mochila_llena.png';
+import iconEmpty from '../../assets/icons/mochila_vacia.png';
+import iconVolume from '../../assets/icons/dosis.png';
 
 const Params = props => {
-    const {
-        rowSeparation,
-        arcNumber,
-        workVelocity,
-        workVelocityReady,
-        workPressure,
-        workPressureReady,
-        workVolume,
-        airFlow,
-        airVelocity,
-        workVolumeReady,
-        sprayFlow
-    } = {};
-    const {name, nozzleData} = {};
 
-    const paramsDispatch = ()=>{};
-    const reportDispatch = ()=>{};
-    
+    const paramsState = useContext(ParamsStateContext);
+    const paramsDispatch = useContext(ParamsDispatchContext);
+    const reportDispatch = useContext(ReportsDispatchContext);
+
+    const setParam = e => {
+        const parsed = parseFloat(e.target.value);
+        const value = parsed ? parsed : e.target.value;
+        setParamValue(paramsDispatch, e.target.name, value);
+    };
+
     const addToReport = () => {
-        addParams(reportDispatch, {
-            rowSeparation,
-            arcNumber,
-            workVelocity,
-            workPressure,
-            workVolume,
-            airFlow,
-            airVelocity,
-            sprayFlow
-        });
+        addParams(reportDispatch, paramsState);
         f7.panel.open();
     };
 
     if(window.walkthrough){
         if(window.walkthrough.running){
-            window.walkthrough.callbacks["params_2"] = () => {
-                actions.computeWorkVelocity(paramsDispatch, nozzleData);
+            window.walkthrough.callbacks["params"] = () => {
+                
             };
         }
     }
 
     return (
         <Page>
-            <Navbar title="Parámetros de aplicación" style={{maxHeight:"40px", marginBottom:"0px"}}/>            
+            <Navbar title="Parámetros de aplicación" style={{maxHeight:"40px", marginBottom:"0px"}}/>
             
-            
+            <List form noHairlinesMd style={{marginTop: "0px", padding:"0px 20px"}}>    
+                <Input
+                    slot="list"
+                    label="Distancia recorrida"
+                    name="d"
+                    type="number"
+                    unit="m"
+                    icon={iconDistance}
+                    value={paramsState.d}
+                    borderColor={paramsState.d ? "green" : "#F5E066"}
+                    onChange={setParam}>
+                </Input>
+                <Input
+                    slot="list"
+                    label="Ancho de banda"
+                    name="w"
+                    type="number"
+                    unit="m"
+                    icon={iconWidth}
+                    value={paramsState.w}
+                    borderColor={paramsState.w ? "green" : "#F5E066"}
+                    onChange={setParam}>
+                </Input>
+                <Input
+                    slot="list"
+                    label="Volumen inicial"
+                    name="Vi"
+                    type="number"
+                    unit="l"
+                    icon={iconFull}
+                    value={paramsState.Vi}
+                    borderColor={paramsState.Vi ? "green" : "#F5E066"}
+                    onChange={setParam}>
+                </Input>
+                <Input
+                    slot="list"
+                    label="Volumen recolectado"
+                    name="Vf"
+                    type="number"
+                    unit="l"
+                    icon={iconEmpty}
+                    value={paramsState.Vf}
+                    borderColor={paramsState.Vf ? "green" : "#F5E066"}
+                    onChange={setParam}>
+                </Input>
+                {paramsState.Vg && <div slot="list">
+                    <span style={{fontSize: "0.85em", color: "rgb(100, 100, 100)", marginLeft: "50px"}}>
+                        Gasto : {paramsState.Vg} l
+                    </span>
+                </div>}
+                <Input
+                    slot="list"
+                    label="Volumen pulverizado"
+                    name="Va"
+                    type="number"
+                    unit="l/ha"
+                    readOnly
+                    icon={iconVolume}
+                    value={paramsState.Va}
+                    borderColor={paramsState.Va ? "green" : "#F5E066"}>
+                </Input>
+            </List>
+
             <Row style={{marginTop:20, marginBottom: 20}}>
                 <Col width={20}></Col>
                 <Col width={60} className="help-target-params_report">
                     <Button 
-                        fill    
+                        fill
                         style={{textTransform:"none"}} 
-                        disabled={!(workVelocityReady && workPressureReady && workVolumeReady)} 
+                        disabled={!Number.isFinite(paramsState.Va)} 
                         onClick={addToReport}>
                             Agregar a reporte
                     </Button>

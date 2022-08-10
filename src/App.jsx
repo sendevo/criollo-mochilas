@@ -1,6 +1,7 @@
 import { App, View, f7 } from 'framework7-react';
 import { App as cApp } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
+import ParamsProvider from './context/ParamsContext';
 import * as Views from './views';
 import ReportsPanel from './components/ReportsPanel';
 import Toast from './components/Toast';
@@ -128,11 +129,10 @@ else
 
 const Criollo = () => (
     <App {...f7params}>
-        
-                        <View main url="/" className="app"/>
-        
-            <ReportsPanel />
-        
+        <ParamsProvider>
+            <View main url="/" className="app"/>
+        </ParamsProvider>
+        <ReportsPanel />
         <Popovers />
     </App>
 );

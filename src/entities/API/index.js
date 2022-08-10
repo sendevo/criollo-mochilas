@@ -3,84 +3,26 @@ const isString = value => (typeof value === 'string' || value instanceof String)
 //const isInteger = Number.isInteger;
 //const isPositiveInteger = value => Number.isInteger(value) && value > 0;
 //const isFloat = Number.isFinite;
-const isPositiveFloat = value => Number.isFinite(value) && value > 0;
+const isNZPositiveFloat = value => Number.isFinite(value) && value > 0;
+const isPositiveFloat = value => Number.isFinite(value) && value >= 0;
 
-
-const _computeQe = {
-    nozzleData: v => v?.length > 0,
-    Na: n => Number.isInteger(n) && (n === 1 || n === 2),
-    Pt: Number.isFinite
+const _computeVg = {
+    Vi: isNZPositiveFloat,
+    Vf: isPositiveFloat
 };
 
-const _computeVa = {        
-    Vt: isPositiveFloat,
-    D: isPositiveFloat,
-    Na: n => Number.isInteger(n) && (n === 1 || n === 2),
-    ..._computeQe
-};
-
-const _computePt = {
-    Va: isPositiveFloat,
-    Vt: isPositiveFloat,
-    D: isPositiveFloat,
-    nozzleData: v => v?.length > 0,
-    Na: n => Number.isInteger(n) && (n === 1 || n === 2)
-};
-
-const _computeVt = {
-    Va: isPositiveFloat,
-    D: isPositiveFloat,
-    ..._computeQe
-};
-
-const _computeQNom = {
-    b: Number.isFinite,
-    c: Number.isFinite,
-    Pnom: Number.isFinite
-};
-
-const _computeAirFlow = {
-    D: isPositiveFloat,
-    h: isPositiveFloat,
-    Vt: Number.isFinite,
-    F: Number.isFinite
-};
-
-const _computeAirVelocity = {
-    turbineSection: isPositiveFloat,
-    airFlow: isPositiveFloat,
-    F: isPositiveFloat
+const _computeVa = {
+    Vg: isPositiveFloat,
+    d: isNZPositiveFloat,
+    w: isNZPositiveFloat
 }
 
-const _computeVaFromTRV = {
-    D: isPositiveFloat,
-    r: isString,
-    h: isPositiveFloat,
-    w: isPositiveFloat,
-    gI: isPositiveFloat,
-};
-
-const _computeEffectiveFlow = {
-    Pt: isPositiveFloat,
-    Pnom: isPositiveFloat,
-    Qnom: isPositiveFloat,
-    c: isPositiveFloat,
-    tms: isPositiveFloat
-};
-
-const _computeEffectiveVolume = {
-    collectedData: v => v?.length > 0 && v.every(d => isPositiveFloat(d.ef)),
-    D: isPositiveFloat,
-    Vt: Number.isFinite
-};
-
 const _computeSuppliesList = {
-    A: isPositiveFloat,
-    T: isPositiveFloat,
-    Va: isPositiveFloat,
+    A: isNZPositiveFloat,
+    T: isNZPositiveFloat,
+    Va: isNZPositiveFloat,
     products: v => v?.length > 0 && v.every(x => isPositiveFloat(x.dose) && isString(x.name) && Number.isInteger(x.presentation))
 };
-
 
 // Validación de lista de parametros 
 const validate = (schema, object) => Object.keys(schema)
@@ -88,27 +30,16 @@ const validate = (schema, object) => Object.keys(schema)
     .map(key => key);
 
 const parameterNames = { // Nombres de los parametros para mostrar en mensajes de error
-    Qnom: "Caudal nominal",
-    Pnom: "Presión nominal",
-    Qb: "Caudal de bomba",
-    Qe: "Caudal efectivo",
-    Na: "Número de arcos",
-    nozzleData: "Configuración de arco",
-    D: "Distancia entre filas",
-    h: "Altura de plantas",
-    w: "Ancho de plantas",
-    gI: "Índice verde",
-    F: "Índice de expansión",
-    airFlow: "Caudal de aire",
-    turbineSection: "Sección de soplado",
-    r: "Forma de planta",
-    Pt: "Presión de trabajo",
-    Va: "Volumen de aplicación",
-    Vt: "Velocidad de trabajo",
-    c: "Volumen recolectado",
-    tms: "Tiempo de muestreo",
+    // Parametros
+    Vi: "Volumen inicial",
+    Vf: "Volumen final",
+    Vg: "Gasto",
+    d: "Distancia recorrida",
+    w: "Ancho de banda",
+    // Calculo de mezcla
     A: "Superficie de trabajo", 
     T: "Capacidad del tanque", 
+    Va: "Volumen de aplicación",
     products: "Lista de productos"
 };
 
@@ -127,83 +58,19 @@ export const presentationUnits = [
     "gr/100l" // 3
 ];
 
-const plantFormIndex = {
-    type_a: 735.9,
-    type_b: 937,
-    type_c: 468.5
+export const computeVg = params => {
+    checkParams(_computeVg, params);
+    const { Vi, Vf } = params;
+    if(Vf > Vi)
+        throw new Error(`El volumen inicial debe ser mayor que el volumen recolectado`);
+    return round2(Vi-Vf);
 };
 
-export const computeQe = params => { // Caudal efectivo
-    checkParams(_computeQe, params);
-    const { nozzleData, Na, Pt } = params;
-    const qe = nozzleData.map(nozzle => nozzle.Qnom*Math.sqrt(Pt/nozzle.Pnom));     
-    const Qe = qe.reduce((a, b) => a + b, 0);
-    return round2(Qe);
-};
-
-export const computeVa = params => { // Volumen de aplicacion
+export const computeVa = params => {
     checkParams(_computeVa, params);
-    const Qe = computeQe(params);
-    const { Vt, D, Na  } = params;
-    return round2(Qe*1200/Vt/D);
-};
-
-export const computeVt = params => { // Velocidad de trabajo
-    checkParams(_computeVt, params);
-    const Qe = computeQe(params);
-    const { Va, D } = params;
-    return round2(Qe*1200/Va/D);
-};
-
-export const computePt = params => { // Presion de trabajo
-    checkParams(_computePt, params);
-    const { Va, Vt, D, Na, nozzleData } = params;
-    const pe = nozzleData.map(nozzle => nozzle.Qnom/Math.sqrt(nozzle.Pnom));
-    const Pe = Va*Vt*D/1200/pe.reduce((a, b) => a + b, 0);
-    return round2(Pe*Pe);
-};
-
-export const computeQNom = params => { // Caudal nominal
-    checkParams(_computeQNom, params);
-    const {b, c, Pnom} = params;
-    return round2(b + c * Math.sqrt(Pnom));
-};
-
-export const computeAirFlow = params => { // Caudal de aire
-    checkParams(_computeAirFlow, params);
-    const {D, h, Vt, F} = params;
-    return round2(Vt * D * h / F * 1000);
-};
-
-export const computeAirVelocity = params => { // Velocidad de soplado
-    checkParams(_computeAirVelocity, params);
-    const {turbineSection, airFlow, F} = params;
-    return round2(F * airFlow / turbineSection / 3600);
-};
-
-export const computeVaFromTRV = params => { // Volumen de aplicacion desde TRV
-    checkParams(_computeVaFromTRV, params);
-    const {D, r, h, w, gI} = params;
-    const rk = plantFormIndex[r];
-    return round2(rk * h * w * gI / D);
-};
-
-export const computeEffectiveFlow = params => { // Caudal efectivo
-    checkParams(_computeEffectiveFlow, params);
-    const { Pt, Qnom, Pnom, c, tms } = params;
-    const th = 10; // Umbral en porcentaje
-    const ef = round2(c / tms * 60000); // Caudal efectivo
-    const Qe = Qnom*Math.sqrt(Pt/Pnom); // Caudal deseado
-    const s = round2((ef - Qe) / Qe * 100); // Desviacion estandar
-    const ok = Math.abs(s) <= th; // Correcto 
-    return { ef, s, ok };
-};
-
-export const computeEffectiveVolume = params => { // Volumen efectivo
-    checkParams(_computeEffectiveVolume, params);
-    const { collectedData, Vt, D } = params;
-    const Qe = collectedData.reduce((a, b) => a + b.ef, 0);
-    return round2(Qe*1200/Vt/D);
+    const { Vg, d, w } = params;
+    const A = d*w/10000;
+    return round2(Vg/A);
 };
 
 const computeProductVolume = (prod, vol, Va) => { // Cantidad de insumo (gr o ml) por volumen de agua

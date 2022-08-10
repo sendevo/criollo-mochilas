@@ -7,13 +7,6 @@ export const addParams = (dispatch, params) => {
     });
 };
 
-export const addControl = (dispatch, control) => {
-    dispatch({
-        type: "ADD_CONTROL",
-        payload: control
-    });
-};
-
 export const addSupplies = (dispatch, supplies) => {
     dispatch({
         type: "ADD_SUPPLIES",
