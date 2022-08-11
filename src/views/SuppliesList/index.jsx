@@ -1,12 +1,15 @@
 import { f7, Navbar, Page, Row, Col, Button, BlockTitle, List, Block } from 'framework7-react';
 import React, { useContext, useState } from 'react';
 import { addSupplies } from '../../entities/Model/reportsActions';
+import { SuppliesStateContext } from '../../context/SuppliesContext';
+import { ReportsDispatchContext } from '../../context/ReportsContext';
 import { BackButton } from '../../components/Buttons';
 import Input from '../../components/Input';
 import { SuppliesTable, PrescriptionTable } from '../../components/SuppliesTable';
 import { formatNumber } from '../../utils';
 import iconReport from '../../assets/icons/reportes.png';
 import classes from './style.module.css';
+
 
 const SuppliesList = props => {
 
@@ -18,9 +21,9 @@ const SuppliesList = props => {
         loadBalancingEnabled,
         supplies,
         capacity
-    } = {};
+    } = useContext(SuppliesStateContext);
     
-    const dispatch = ()=>{};
+    const dispatch = useContext(ReportsDispatchContext);
     
     const [comments, setComments] = useState('');
 

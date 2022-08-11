@@ -1,9 +1,12 @@
 import { useState } from 'react';
+import { useSound } from 'use-sound';
 import { Block, Col, Navbar, Page, Row } from 'framework7-react';
 import { BackButton, PlayButton } from '../../components/Buttons';
 import slowPaceIcon from '../../assets/icons/slow_pace.png';
 import mediumPaceIcon from '../../assets/icons/slow_pace.png';
 import fastPaceIcon from '../../assets/icons/slow_pace.png';
+import ticSfx from "../../assets/sounds/tic.mp3";
+import { useEffect } from 'react';
 
 const PaceButton = ({selected, icon, onClick, text}) => {
     return (
@@ -29,9 +32,20 @@ const PaceButton = ({selected, icon, onClick, text}) => {
 
 const Pace = props => {
 
-    const [selected, setSelected] = useState("slow");
+    const [selected, setSelected] = useState(2000);
     const [running, setRunning] = useState(false);
+    const [step, setStep] = useState(false);
+    const [playTic] = useSound(ticSfx);
     
+    useEffect(() => {
+        if(running){
+            playTic(); //console.log("tic");
+            setTimeout(()=>{ 
+                setStep(!step);
+            }, selected);
+        }
+    }, [step, running]);
+
     return (
         <Page>
             <Navbar title="Ritmo" style={{maxHeight:"40px", marginBottom:"10px"}}/>            
@@ -45,23 +59,23 @@ const Pace = props => {
                     <Col width={33}>
                         <PaceButton 
                             text="Lento"
-                            selected={selected==="slow"}
+                            selected={selected===2000}
                             icon={slowPaceIcon}
-                            onClick={()=>setSelected("slow")}/>
+                            onClick={()=>setSelected(2000)}/>
                     </Col>
                     <Col width={33}>
                         <PaceButton 
                             text="Medio"
-                            selected={selected==="medium"}
+                            selected={selected===1500}
                             icon={mediumPaceIcon}
-                            onClick={()=>setSelected("medium")}/>
+                            onClick={()=>setSelected(1500)}/>
                     </Col>
                     <Col width={33}>
                         <PaceButton 
                             text="Rápido"
-                            selected={selected==="fast"}
+                            selected={selected===1000}
                             icon={fastPaceIcon}
-                            onClick={()=>setSelected("fast")}/>
+                            onClick={()=>setSelected(1000)}/>
                     </Col>
                 </Row>
             </Block>

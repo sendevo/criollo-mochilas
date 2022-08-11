@@ -63,7 +63,7 @@ const reportFooter = {
 const PDFExport = (report, share) => {
     const reportContent = [ // Composicion de todo el documento
         {
-            text: "Criollo Atomizadores",
+            text: "Criollo Mochilas",
             style: "header"
         },
         {
@@ -86,142 +86,32 @@ const PDFExport = (report, share) => {
             style: "section"
         });
         reportContent.push({
-            text: "Configuración de arco",
-            style: "subsection"
-        });
-        reportContent.push({
             layout: 'lightHorizontalLines',
             table: {
                 headerRows: 0,
                 widths: ['*', '*'],
                 body: [
                     [{
-                        text: "Nombre:",
+                        text: "Distancia recorrida:",
                         style: "tableHeader"
-                    }, report.params.arcName ? report.params.arcName : "N/A"],
+                    }, formatNumber(report.params.d)+" m"],
                     [{
-                        text: "Número de arcos:",
+                        text: "Ancho de banda:",
                         style: "tableHeader"
-                    }, report.params.arcNumber],
-                ]
-            },
-            margin: [0, 0, 0, 15]
-        });
-
-        reportContent.push({
-            text: "Parámetros de pulverización",
-            style: "subsection"
-        });
-        reportContent.push({
-            layout: 'lightHorizontalLines',
-            table: {
-                headerRows: 0,
-                widths: ['*', '*'],
-                body: [
+                    }, formatNumber(report.params.w) + " m"],
                     [{
-                        text: "Distancia entre filas:",
+                        text: "Volumen inicial:",
                         style: "tableHeader"
-                    }, formatNumber(report.params.rowSeparation)+" m"],
+                    }, formatNumber(report.params.Vi) + " l"],
                     [{
-                        text: "Velocidad de trabajo:",
+                        text: "Volumen recolectado:",
                         style: "tableHeader"
-                    }, formatNumber(report.params.workVelocity) + " km/h"],
-                    [{
-                        text: "Presión de trabajo:",
-                        style: "tableHeader"
-                    }, formatNumber(report.params.workPressure) + " bar"],
+                    }, formatNumber(report.params.Vf) + " l (Gasto: "+formatNumber(report.params.Vg)+" l)"],
                     [{
                         text: "Volumen de aplicación:",
                         style: "tableHeader"
-                    }, formatNumber(report.params.workVolume) + " l/ha"],
-                    [{
-                        text: "Caudal de aire:",
-                        style: "tableHeader"
-                    }, formatNumber(report.params.airFlow) + " m³/h"],
+                    }, formatNumber(report.params.Va) + " l/ha"],
                 ]
-            },
-            margin: [0, 0, 0, 15]
-        });
-    }
-
-    if(report.completed.control) {
-        reportContent.push({
-            text: "Verificación de picos",
-            style: "section"
-        });
-        const controlBody = [
-            [{
-                text: "Volumen ef. arco derecho:",
-                style: "tableHeader"
-            }, formatNumber(report.control.outputs.right.effectiveSprayVolume)+" l/min"],
-            [{
-                text: "Diferencia:",
-                style: "tableHeader"
-            }, formatNumber(report.control.outputs.right.diff) + " l/ha, " + formatNumber(report.control.outputs.right.diffp)+" %"]
-        ];
-        if(report.control.arcNumber === 2) {
-            controlBody.push([{
-                text: "Volumen ef. arco izquierdo:",
-                style: "tableHeader"
-            }, formatNumber(report.control.outputs.left.effectiveSprayVolume)+" l/min"]);
-            controlBody.push([{
-                text: "Diferencia:",
-                style: "tableHeader"
-            }, formatNumber(report.control.outputs.left.diff) + " l/ha, " + formatNumber(report.control.outputs.left.diffp)+" %"]);
-        }
-        reportContent.push({
-            layout: 'lightHorizontalLines',
-            table: {
-                headerRows: 0,
-                widths: ['*', '*'],
-                body: controlBody
-            },
-            margin: [0, 0, 0, 15]
-        });
-        const rows = [
-            [
-                {
-                    text: "Pico",
-                    style: "tableHeader"
-                },
-                {
-                    text: "Caudal efectivo",
-                    style: "tableHeader"
-                },
-                {
-                    text: "Desvío",
-                    style: "tableHeader"
-                },
-                {
-                    text: "Correcto",
-                    style: "tableHeader"
-                }
-            ]
-        ];
-        report.control.tableData.right.forEach((row, idx) => {
-            rows.push([
-                `${idx+1} (der.)`,
-                formatNumber(row.ef)+" l/min",
-                formatNumber(row.s)+" %",
-                row.ok? "v" : "x",
-            ]);
-        });
-        if(report.control.arcNumber === 2) {
-            report.control.tableData.left.forEach((row, idx) => {
-                rows.push([
-                    `${idx+1} (izq.)`,
-                    formatNumber(row.ef)+" l/min",
-                    formatNumber(row.s)+" %",
-                    row.ok? "v" : "x",
-                ]);
-            });
-        }
-        reportContent.push({
-            layout: 'lightHorizontalLines',
-            table: {
-                headerRows: 1,
-                widths: ['*', '*', '*', '*'],
-                body: rows
             },
             margin: [0, 0, 0, 15]
         });

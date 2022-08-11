@@ -2,6 +2,7 @@ import { App, View, f7 } from 'framework7-react';
 import { App as cApp } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
 import ParamsProvider from './context/ParamsContext';
+import SuppliesProvider from './context/SuppliesContext';
 import ReportsProvider from './context/ReportsContext';
 import * as Views from './views';
 import ReportsPanel from './components/ReportsPanel';
@@ -132,7 +133,9 @@ const Criollo = () => (
     <App {...f7params}>
         <ReportsProvider>
             <ParamsProvider>
-                <View main url="/" className="app"/>
+                <SuppliesProvider>
+                    <View main url="/" className="app"/>
+                </SuppliesProvider>
             </ParamsProvider>
             <ReportsPanel />
         </ReportsProvider>

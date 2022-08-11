@@ -12,6 +12,8 @@ import {
     CardContent
 } from 'framework7-react';
 import { useState, useContext } from 'react';
+import { ParamsStateContext } from '../../context/ParamsContext.jsx';
+import { SuppliesStateContext, SuppliesDispatchContext } from '../../context/SuppliesContext.jsx';
 import * as actions from '../../entities/Model/suppliesActions.js';
 import Input from '../../components/Input';
 import { BackButton, DeleteButton, AddButton } from '../../components/Buttons';
@@ -27,9 +29,9 @@ import iconCapacity from '../../assets/icons/capacidad_carga.png';
 
 const Supplies = props => {
 
-    const workVolume = 10;
+    const {Va} = useContext(ParamsStateContext);
     // El volumen de aplicacion debe editarse por separado
-    const [workVolume2, setWorkVolume2] = useState(workVolume);
+    const [workVolume, setWorkVolume2] = useState(Va);
 
     const {
         lotName,
@@ -39,9 +41,9 @@ const Supplies = props => {
         capacity,
         loadBalancingEnabled,
         products        
-    } = {};
+    } = useContext(SuppliesStateContext);
 
-    const dispatch = ()=>{};
+    const dispatch = useContext(SuppliesDispatchContext);
 
     const handleWorkVolumeChange = e => {
         const value = parseFloat(e.target.value);
@@ -52,26 +54,26 @@ const Supplies = props => {
     };
 
     const submit = () => {
-        // La variable workVolume de SuppliesStateContext se actualiza al cambiar workVolume2,
+        // La variable workVolume de SuppliesStateContext se actualiza al cambiar workVolume,
         // pero si se deja con el valor original de workVolume de ModelStateContext, vale "".
         // Por lo tanto, debe actualizarse antes de ir a la vista de resumen de insumos.
-        if(workVolume === workVolume2){
-            actions.setParameter(dispatch, 'workVolume', workVolume);
+        if(Va === workVolume){
+            actions.setParameter(dispatch, 'workVolume', Va);
         }
-        actions.getSuppliesList(dispatch, workVolume2);
+        actions.getSuppliesList(dispatch, workVolume);
     };
 
     if(window.walkthrough){
         if(window.walkthrough.running){
             window.walkthrough.callbacks["supplies_capacity"] = () => {
-                actions.setParameter(dispatch, 'lotName', 'Lote 1');
+                /*actions.setParameter(dispatch, 'lotName', 'Lote 1');
                 actions.setParameter(dispatch, 'workArea', '10');
-                actions.setParameter(dispatch, 'capacity', '1000');
+                actions.setParameter(dispatch, 'capacity', '1000');*/
             };
             window.walkthrough.callbacks["supplies_add"] = () => {
-                actions.newProduct(dispatch);
+                /*actions.newProduct(dispatch);
                 actions.setProductParams(dispatch, 0, {name: "Producto 1"});
-                actions.setProductParams(dispatch, 0, {dose: 100});
+                actions.setProductParams(dispatch, 0, {dose: 100});*/
             };
         }
     }
@@ -124,7 +126,7 @@ const Supplies = props => {
                     type="number"
                     unit="l/ha"
                     icon={iconVolume}
-                    value={workVolume2}
+                    value={workVolume}
                     onChange={handleWorkVolumeChange}
                     ></Input>
                 <Input                    
