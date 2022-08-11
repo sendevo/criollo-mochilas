@@ -23,78 +23,35 @@ import { f7 } from "framework7-react";
 const STEPS = [
     {
         page: "/params/",
-        key: "row_separation",
-        text: "Para comenzar, indique la distancia entre filas de plantas ingresando la medida en metros.",
+        key: "params_distance_width",
+        text: "Para comenzar, indique la distancia del recorrido en metros y el ancho de la banda de pulverización."
     },
     {
         page: "/params/",
-        key: "arc_config",
-        text: "En esta sección puede indicar la cantidad de arcos y crear distintas configuraciones de picos.",
-    },
-    {
-        page: "/arc/",
-        key: "nozzle_cnt",
-        text: "Para configurar el arco, indique la cantidad de picos.",
-    },
-    {
-        page: "/arc/",
-        key: "nozzle_config",
-        text: "Seleccione los picos y elija el modelo en la parte inferior. También puede editar los parámetros seleccionando la opción \"Personalizado\".",
-    },
-    {
-        page: "/arc/",
-        key: "arc_save",
-        text: "Al finalizar, presione en guardar y elija un nombre para la configuración creada.",
-        angle: "on-bottom"
+        key: "params_volumes",
+        text: "Luego indique los volúmenes inicial y final recolectado luego de la aplicación."
     },
     {
         page: "/params/",
-        key: "params_1",
-        text: "Para determinar los parámetros de pulverización, modifique los valores y presione en el ícono correspondiente a la variable a calcular.",
-    },
-    {
-        page: "/params/",
-        key: "params_2",
-        text: "El color de borde de cada ícono indica el estado del valor: amarillo = sin actualizar, verde = actualizado.",
-    },
-    {
-        page: "/params/",
-        key: "params_3",
-        text: "Presionando en los botones de la derecha, puede medir la velocidad de avance, calcular volumen según TRV o calcular la velocidad de aire.",
+        key: "params_results",
+        text: "En la última casilla se mostrará el volumen aplicado en litros y litros por hectárea.",
         angle: "on-bottom"
     },
     {
         page: "/params/",
         key: "params_report",
-        text: "Finalmente, puede guardar estos resultados en un reporte.",
+        text: "Si lo desea, puede registrar estos resultados en un reporte.",
         angle: "on-bottom"
     },
     {
-        page: "/control/",
-        key: "control_sampling",
-        text: "Para realizar la verificación de picos, indique el tiempo de muestreo.",
+        page: "/pace/",
+        key: "pace_speed",
+        text: "Para iniciar la labor, elija la velocidad del marcador."
     },
     {
-        page: "/control/",
-        key: "control_play",
-        text: "Presione el botón verde para iniciar el timer. Recuerde subir el volumen de su móvil para oir las alertas.",
-    },
-    {
-        page: "/control/",
-        key: "control_table",
-        text: "A medida que ingrese los volúmenes recolectados en las filas correspondientes, se actualizarán los resultados.",
-    },
-    {
-        page: "/control/",
-        key: "control_results",
-        text: "Al completar toda la tabla, aparecerán los valores del resultado de la verificación.",
-        angle: "on-bottom"
-    },
-    {
-        page: "/control/",
-        key: "control_reports",
-        text: "Si lo desea, puede guardar estos resultados en un reporte.",
-        angle: "on-bottom"
+        page: "/pace/",
+        key: "pace_start",
+        text: "Para iniciar o detener el marcador, presione el botón central.",
     },
     {
         page: "/supplies/",

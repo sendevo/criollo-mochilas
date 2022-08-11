@@ -53,17 +53,18 @@ const Params = props => {
                     borderColor={paramsState.d ? "green" : "#F5E066"}
                     onChange={setParam}>
                 </Input>
-                <Input
-                    slot="list"
-                    label="Ancho de banda"
-                    name="w"
-                    type="number"
-                    unit="m"
-                    icon={iconWidth}
-                    value={paramsState.w}
-                    borderColor={paramsState.w ? "green" : "#F5E066"}
-                    onChange={setParam}>
-                </Input>
+                <div slot="list" className={"help-target-params_distance_width"}>
+                    <Input                    
+                        label="Ancho de banda"
+                        name="w"
+                        type="number"
+                        unit="m"
+                        icon={iconWidth}
+                        value={paramsState.w}
+                        borderColor={paramsState.w ? "green" : "#F5E066"}
+                        onChange={setParam}>
+                    </Input>
+                </div>
                 <Input
                     slot="list"
                     label="Volumen inicial"
@@ -75,33 +76,36 @@ const Params = props => {
                     borderColor={paramsState.Vi ? "green" : "#F5E066"}
                     onChange={setParam}>
                 </Input>
-                <Input
-                    slot="list"
-                    label="Volumen recolectado"
-                    name="Vf"
-                    type="number"
-                    unit="l"
-                    icon={iconEmpty}
-                    value={paramsState.Vf}
-                    borderColor={paramsState.Vf ? "green" : "#F5E066"}
-                    onChange={setParam}>
-                </Input>
+                <div slot="list" className='help-target-params_volumes'>
+                    <Input                        
+                        label="Volumen recolectado"
+                        name="Vf"
+                        type="number"
+                        unit="l"
+                        icon={iconEmpty}
+                        value={paramsState.Vf}
+                        borderColor={paramsState.Vf ? "green" : "#F5E066"}
+                        onChange={setParam}>
+                    </Input>
+                </div>
                 {paramsState.Vg && <div slot="list">
                     <span style={{fontSize: "0.85em", color: "rgb(100, 100, 100)", marginLeft: "50px"}}>
                         Gasto : {paramsState.Vg} l
                     </span>
                 </div>}
-                <Input
-                    slot="list"
-                    label="Volumen pulverizado"
-                    name="Va"
-                    type="number"
-                    unit="l/ha"
-                    readOnly
-                    icon={iconVolume}
-                    value={paramsState.Va}
-                    borderColor={paramsState.Va ? "green" : "#F5E066"}>
-                </Input>
+
+                <div slot="list" className="help-target-params_results">
+                    <Input                        
+                        label="Volumen pulverizado"
+                        name="Va"
+                        type="number"
+                        unit="l/ha"
+                        readOnly
+                        icon={iconVolume}
+                        value={paramsState.Va}
+                        borderColor={paramsState.Va ? "green" : "#F5E066"}>
+                    </Input>
+                </div>
             </List>
 
             <Row style={{marginTop:20, marginBottom: 20}}>

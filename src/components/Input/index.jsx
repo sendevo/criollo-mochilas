@@ -2,7 +2,7 @@ import { ListInput } from "framework7-react";
 import classes from './style.module.css'
 
 const Input = props => (
-    <div className={classes.Container} style={props.style}>
+    <div className={[classes.Container, props.className].join(" ")} style={props.style}>
         <ListInput
             className={classes.Input}
             outline

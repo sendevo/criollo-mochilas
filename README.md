@@ -94,6 +94,6 @@ $ npx cap open android
   - [x] Reportes.  
     - [x] Creación, eliminación, consulta.  
     - [x] Convertir a PDF.  
-  - [ ] Informacion y ayuda.  
+  - [x] Informacion y ayuda.  
     - [x] Información acerca de.  
-    - [ ] Modo ayuda.  
+    - [x] Modo ayuda.  

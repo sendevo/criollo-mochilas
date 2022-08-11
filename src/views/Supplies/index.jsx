@@ -66,14 +66,14 @@ const Supplies = props => {
     if(window.walkthrough){
         if(window.walkthrough.running){
             window.walkthrough.callbacks["supplies_capacity"] = () => {
-                /*actions.setParameter(dispatch, 'lotName', 'Lote 1');
-                actions.setParameter(dispatch, 'workArea', '10');
-                actions.setParameter(dispatch, 'capacity', '1000');*/
+                actions.setParameter(dispatch, 'lotName', 'Lote 1');
+                actions.setParameter(dispatch, 'workArea', '1');
+                actions.setParameter(dispatch, 'capacity', '10');
             };
             window.walkthrough.callbacks["supplies_add"] = () => {
-                /*actions.newProduct(dispatch);
-                actions.setProductParams(dispatch, 0, {name: "Producto 1"});
-                actions.setProductParams(dispatch, 0, {dose: 100});*/
+                actions.newProduct(dispatch);
+                actions.setProductParams(dispatch, 0, {name: "Producto A"});
+                actions.setProductParams(dispatch, 0, {dose: 100});
             };
         }
     }

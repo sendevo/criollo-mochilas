@@ -54,7 +54,7 @@ const Pace = props => {
                 <h4>Seleccione el tipo de paso:</h4>
             </Block>
 
-            <Block>
+            <Block className="help-target-pace_speed">
                 <Row>
                     <Col width={33}>
                         <PaceButton 
@@ -80,7 +80,7 @@ const Pace = props => {
                 </Row>
             </Block>
 
-            <Block>
+            <Block className='help-target-pace_start'>
                 <Row style={{justifyContent:"center", marginTop:10}}>
                     <PlayButton 
                         size={80}
