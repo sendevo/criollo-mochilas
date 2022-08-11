@@ -1,0 +1,6 @@
+{
+	"appId": "com.inta.criollom",
+	"appName": "Criollo Mochilas",
+	"webDir": "dist",
+	"bundledWebRuntime": false
+}
