@@ -1,5 +1,6 @@
 import { Page, Link, PageContent, Block } from 'framework7-react';
-import paramsIcon from '../../assets/icons/mochila.png'
+import paramsIcon from '../../assets/icons/mochila.png';
+import paceIcon from '../../assets/icons/pace.png';
 import suppliesIcon from '../../assets/icons/calculador.png';
 import reportsIcon from '../../assets/icons/reportes.png';
 import securityIcon from '../../assets/icons/seguridad.png';
@@ -25,7 +26,7 @@ const Home = () => (
                     <p>Parámetros de <br/> aplicación</p>
                 </Link>
                 <Link href="/pace/" className={classes.MenuButton}>
-                    <img className={classes.HomeIcon} src={suppliesIcon} alt="pace"/>
+                    <img className={classes.HomeIcon} src={paceIcon} alt="pace"/>
                     <p>Ritmo</p>
                 </Link>
                 <Link href="/supplies/" className={classes.MenuButton}>

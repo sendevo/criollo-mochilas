@@ -3,8 +3,8 @@ import { useSound } from 'use-sound';
 import { Block, Col, Navbar, Page, Row } from 'framework7-react';
 import { BackButton, PlayButton } from '../../components/Buttons';
 import slowPaceIcon from '../../assets/icons/slow_pace.png';
-import mediumPaceIcon from '../../assets/icons/slow_pace.png';
-import fastPaceIcon from '../../assets/icons/slow_pace.png';
+import mediumPaceIcon from '../../assets/icons/medium_pace.png';
+import fastPaceIcon from '../../assets/icons/fast_pace.png';
 import ticSfx from "../../assets/sounds/tic.mp3";
 import { useEffect } from 'react';
 
@@ -50,11 +50,11 @@ const Pace = props => {
         <Page>
             <Navbar title="Ritmo" style={{maxHeight:"40px", marginBottom:"10px"}}/>            
 
-            <Block style={{marginTop:"0px"}}>
-                <h4>Seleccione el tipo de paso:</h4>
+            <Block style={{marginTop:"0px", marginBottom:"10px"}}>
+                <h4>Seleccione la velocidad de marcha:</h4>
             </Block>
 
-            <Block className="help-target-pace_speed">
+            <Block className="help-target-pace_speed" style={{marginTop:"0px"}}>
                 <Row>
                     <Col width={33}>
                         <PaceButton 
