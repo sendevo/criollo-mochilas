@@ -1,5 +1,7 @@
 .Container {
-    position: relative;    
+    position: relative;  
+    margin-top: 0px!important;  
+    margin-bottom: 10px;
 }
 
 .Select {
@@ -8,6 +10,6 @@
 
 .SelectIcon {
     position: absolute;
-    top: 10px;
+    top: 12px!important;
     height: 50px;
 }

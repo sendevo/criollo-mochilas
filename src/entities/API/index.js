@@ -89,10 +89,10 @@ export const computeSuppliesList = params => { // Lista de insumos y cargas para
     // Calcular cantidades de cada producto
     const pr = products.map(p => ({
         ...p, // Por comodidad, dejar resto de los detalles en este arreglo
-        cpp: computeProductVolume(p, T, Va)/1000, // Cantidad por carga completa [l o kg]
-        cfc: computeProductVolume(p, Vf, Va)/1000, // Cantidad por carga fraccional [l o kg]
-        ceq: computeProductVolume(p, Vcb, Va)/1000, // Cantidad por carga equilibrada [l o kg]
-        total: computeProductVolume(p, T, Va)*Nc/1000, // Cantidad total de insumo [l o kg]
+        cpp: computeProductVolume(p, T, Va), // Cantidad por carga completa [ml o gr]
+        cfc: computeProductVolume(p, Vf, Va), // Cantidad por carga fraccional [ml o gr]
+        ceq: computeProductVolume(p, Vcb, Va), // Cantidad por carga equilibrada [ml o gr]
+        total: computeProductVolume(p, T, Va)*Nc // Cantidad total de insumo [ml o gr]
     }));
 
     return {pr, Nc, Ncc, Vf, Ncb, Vcb, Vftl};

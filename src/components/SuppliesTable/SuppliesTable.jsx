@@ -15,7 +15,7 @@ const SuppliesTable = props => (
             <tbody>
             {
                 props.supplies.pr?.map(prod => {
-                    const unit = prod.presentation === 0 || prod.presentation === 2 ? "l" : "kg";
+                    const unit = prod.presentation === 0 || prod.presentation === 2 ? "ml" : "gr";
                     return (
                         <tr key={prod.key}>
                             <td>{prod.name}</td>
