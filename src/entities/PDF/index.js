@@ -166,7 +166,7 @@ const PDFExport = (report, share) => {
         report.supplies.pr.forEach(prod => {            
             rows1.push( [
                 prod.name,
-                formatNumber(prod.ceq, 2) + " " + presentationUnits[prod.presentation]
+                formatNumber(prod.dose, 2) + " " + presentationUnits[prod.presentation]
             ]);
         });
 
