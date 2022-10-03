@@ -66,7 +66,7 @@ const SuppliesList = props => {
                     }
                     <tr>
                         <td><b>Superficie:</b></td>
-                        <td>{workArea} ha</td>
+                        <td>{formatNumber(workArea,0)} m²</td>
                     </tr>
                     <tr>
                         <td><b>Volumen de pulverización:</b></td>

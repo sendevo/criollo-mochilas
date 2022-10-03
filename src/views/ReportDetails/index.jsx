@@ -73,7 +73,7 @@ const ReportDetails = props => {
                             }
                             <tr>
                                 <td><b>Superficie:</b></td>
-                                <td className={classes.DataCell}>{formatNumber(report.supplies.workArea)} ha</td>
+                                <td className={classes.DataCell}>{formatNumber(report.supplies.workArea, 0)} m²</td>
                             </tr>
                             <tr>
                                 <td><b>Volumen pulverizado:</b></td>

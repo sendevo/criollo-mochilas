@@ -67,7 +67,7 @@ const Supplies = props => {
         if(window.walkthrough.running){
             window.walkthrough.callbacks["supplies_capacity"] = () => {
                 actions.setParameter(dispatch, 'lotName', 'Lote 1');
-                actions.setParameter(dispatch, 'workArea', '1');
+                actions.setParameter(dispatch, 'workArea', '1000');
                 actions.setParameter(dispatch, 'capacity', '10');
             };
             window.walkthrough.callbacks["supplies_add"] = () => {
@@ -96,12 +96,12 @@ const Supplies = props => {
                     value={lotName}
                     onChange={v=>actions.setParameter(dispatch,'lotName', v.target.value)}
                     ></Input>
-                <Input                    
+                <Input
                     slot="list"
                     label="Superficie"
                     name="workArea"
                     type="number"
-                    unit="ha"
+                    unit="m²"
                     icon={iconArea}
                     value={workArea}
                     onChange={v=>actions.setParameter(dispatch,'workArea', parseFloat(v.target.value))}

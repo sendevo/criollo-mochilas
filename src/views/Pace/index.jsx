@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Block, Col, Navbar, Page, Row } from 'framework7-react';
 import { BackButton, PlayButton } from '../../components/Buttons';
 import Select from '../../components/Select';
@@ -6,13 +6,11 @@ import slowPaceIcon from '../../assets/icons/slow_pace.png';
 import mediumPaceIcon from '../../assets/icons/medium_pace.png';
 import fastPaceIcon from '../../assets/icons/fast_pace.png';
 import soundIcon from '../../assets/icons/sound.png';
-import beepSfx from "../../assets/sounds/beep.wav";
-import beep2Sfx from "../../assets/sounds/beep2.wav";
+//import beepSfx from "../../assets/sounds/beep.wav";
+//import beep2Sfx from "../../assets/sounds/beep2.wav";
 import chirpSfx from "../../assets/sounds/chirp.wav";
 import chirp2Sfx from "../../assets/sounds/chirp2.wav";
 import kissSfx from "../../assets/sounds/kiss.wav";
-
-import { useEffect } from 'react';
 
 const PaceButton = ({selected, icon, onClick, text}) => {
     return (
@@ -37,8 +35,8 @@ const PaceButton = ({selected, icon, onClick, text}) => {
 };
 
 const tracks = [
-    {src: beepSfx, name: "Tono 1"},
-    {src: beep2Sfx, name: "Tono 2"},
+    //{src: beepSfx, name: "Tono 1"},
+    //{src: beep2Sfx, name: "Tono 2"},
     {src: chirpSfx, name: "Pájaro 1"},
     {src: chirp2Sfx, name: "Pájaro 2"},
     {src: kissSfx, name: "Chasquido"},
@@ -110,8 +108,8 @@ const Pace = props => {
                         disabled={!selected}
                         running={running}
                         onClick={()=>setRunning(!running)}/>
-                </Row> 
-            </Block>       
+                </Row>
+            </Block>
 
             <BackButton {...props} />
         </Page>

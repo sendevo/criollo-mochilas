@@ -69,7 +69,7 @@ export const computeVg = params => {
 export const computeVa = params => {
     checkParams(_computeVa, params);
     const { Vg, d, w } = params;
-    const A = d*w/10000;
+    const A = d*w/10000; // Sup. en Ha.
     return round2(Vg/A);
 };
 
@@ -80,11 +80,12 @@ const computeProductVolume = (prod, vol, Va) => { // Cantidad de insumo (gr o ml
 export const computeSuppliesList = params => { // Lista de insumos y cargas para mezcla   
     checkParams(_computeSuppliesList, params);
     const { A, T, Va, products } = params;
-    const Nc = A*Va/T; // Cantidad de cargas
+    const Aha = A/10000; // Recordar que A esta en m2
+    const Nc = Aha*Va/T; // Cantidad de cargas
     const Ncc = Math.floor(Nc); // Cantidad de cargas completas
     const Vf = (Nc - Ncc)*T; // Volumen fraccional [L]
     const Ncb = Math.ceil(Nc); // Cantidad de cargas balanceadas
-    const Vcb = A*Va/Ncb; // Volumen de cargas balanceadas
+    const Vcb = Aha*Va/Ncb; // Volumen de cargas balanceadas
     const Vftl = Vf/T < 0.2; // Detectar volumen fraccional total menor a 20%
     // Calcular cantidades de cada producto
     const pr = products.map(p => ({

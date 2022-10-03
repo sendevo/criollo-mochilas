@@ -128,7 +128,7 @@ const PDFExport = (report, share) => {
             style: "text"
         });
         reportContent.push({
-            text: "Superficie: " + formatNumber(report.supplies.workArea) + " ha",
+            text: "Superficie: " + formatNumber(report.supplies.workArea, 0) + " m²",
             style: "text"
         });
         reportContent.push({
@@ -225,7 +225,7 @@ const PDFExport = (report, share) => {
         ];
 
         report.supplies.pr.forEach(prod => {
-            const unit = prod.presentation === 0 || prod.presentation === 2 ? " l" : " kg";
+            const unit = prod.presentation === 0 || prod.presentation === 2 ? " ml" : " gr";
             rows2.push( report.supplies.loadBalancingEnabled ? [
                 prod.name,
                 formatNumber(prod.ceq, 1) + unit,
@@ -271,7 +271,7 @@ const PDFExport = (report, share) => {
     };
 
     // Generar y guardar
-    const fileName = "Reporte Criollo "+moment(report.timestamp).format("DD-MM-YYYY HH-mm")+".pdf";    
+    const fileName = "Reporte Criollo Mochilas "+moment(report.timestamp).format("DD-MM-YYYY HH-mm")+".pdf";    
     const pdfFile = pdfMake.createPdf(document);
 
     if(Capacitor.isNativePlatform()){
