@@ -78,7 +78,7 @@ const Params = props => {
                 </Input>
                 <div slot="list" className='help-target-params_volumes'>
                     <Input                        
-                        label="Volumen recolectado"
+                        label="Volumen sobrante"
                         name="Vf"
                         type="number"
                         unit="l"
