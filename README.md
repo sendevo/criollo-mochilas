@@ -43,24 +43,41 @@ $ npx cap add android
 $ npm run build && npx cap sync
 ```
 
-3.- Agregar permisos en android/app/src/main/AndroidManifest.xml:  
+3.- Indicar el SDK level en app/variables.gradle
+```
+minSdkVersion = 21
+compileSdkVersion = 30
+targetSdkVersion = 31
+```
+
+4.- Agregar permisos en android/app/src/main/AndroidManifest.xml:  
 
 ```xml
 ...
-<aplication
+<aplication>
   ...
-  android:requestLegacyExternalStorage="true">
+  android:requestLegacyExternalStorage="true"
+  ...
+  <activity
+    ...
+    android:exported="true"
+    ...
+    >
+  </activity>
   ...
 </application>
+
 ...
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 ```
 
-4.- Definir iconos y splashcreens en android/app/src/main/res.  
+5.- Definir iconos y splashcreens en android/app/src/main/res.  
 
-5.- Abrir proyecto de AndroidStudio:
+6.- Abrir proyecto de AndroidStudio:
 ```bash
 $ npx cap open android
 ```
@@ -73,10 +90,11 @@ $ npx cap open android
 
 ### Compilar versión release con AndroidStudio:  
 1.- Editar versionName y versionCode en android/app/build.gradle   
-2.- Ir al menú Build -> Generate Signed Bundle/APK...  
-3.- Ingresar directorio de la firma (.jks), claves "Key Store Password" y "Key Password".  
-4.- Generar app-release.apk o app-release.aab.   
-5.- Preparar capturas de pantalla y lista de cambios.   
+2.- Verificar el valor de "targetSdkVersion" en android/variables.gradle
+3.- Ir al menú Build -> Generate Signed Bundle/APK...  
+4.- Ingresar directorio de la firma (.jks), claves "Key Store Password" y "Key Password".  
+5.- Generar app-release.apk o app-release.aab.   
+6.- Preparar capturas de pantalla y lista de cambios.   
 
 
 
