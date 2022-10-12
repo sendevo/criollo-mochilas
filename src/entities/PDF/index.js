@@ -303,7 +303,7 @@ const PDFExport = (report, share) => {
                     }else 
                         Toast("success", "Reporte guardado en Documentos: "+fileName, 2000, "center");                    
                 }).catch(err => {
-                    console.log(err);
+                    //console.log(err);
                     Toast("error", "Error al guardar el reporte", 2000, "center");
                 });
             });
@@ -315,10 +315,10 @@ const PDFExport = (report, share) => {
             }else{
                 Toast("info", "Permisos de almacenamiento no otorgados", 2000, "center");
                 Filesystem.requestPermissions().then(res => {
-                    console.log(res);
+                    //console.log(res);
                     saveFile(fileName);
                 }).catch(() => {
-                    console.log("No se pudo guardar el reporte");
+                    //console.log("No se pudo guardar el reporte");
                 });
             }
         });

@@ -97,6 +97,20 @@ $ npx cap open android
 6.- Preparar capturas de pantalla y lista de cambios.   
 
 
+### Extension Auravant
+1.- Para compilar extension Auravant, agregar el siguiente tag dentro del ```<head>``` de index.html
+```html
+<script src="https://auraview.auravant.com/sdk/v1.0/aura-package_v1.0.js"></script>
+``` 
+2.- Compilar
+```bash
+$ npm run build
+```
+
+3.- Comprimir carpeta dist
+
+4.- Subir
+
 
 ### Backlog
 

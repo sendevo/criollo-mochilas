@@ -19,7 +19,7 @@ const getPosition = () => {
             }else{
                 Toast("info", "Permisos de ubicación no otorgados", 2000, "center");
                 Geolocation.requestPermissions().then(res => {
-                    console.log(res);
+                    //console.log(res);
                     getCoords();
                 }).catch(() => {
                     Toast("error", "No se pudo actualizar los permisos de ubicación", 2000, "center");

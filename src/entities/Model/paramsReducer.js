@@ -17,7 +17,7 @@ export const reducer = (state, action) => {
         case "SET_PARAM_VALUE": {
             const {name, value} = action.payload;
             if(nonEditableParams.includes(name)){
-                console.log("El parámetro "+name+" requiere lógica adicional para editar");
+                //console.log("El parámetro "+name+" requiere lógica adicional para editar");
                 return state;
             }
             const nextState = {

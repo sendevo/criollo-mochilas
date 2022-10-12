@@ -19,9 +19,9 @@ class Timer {
         this.current_ms = this.initial;
     }
 
-    onChange = c => console.log(c)
+    onChange = c => Function.prototype() //console.log(c)
 
-    onTimeout = () => console.log("timeout")
+    onTimeout = () => Function.prototype() //console.log("timeout")
 
     step = () => {
         if(this.running) {            

@@ -144,11 +144,12 @@ export default class WalkthroughModel {
                     try{
                         f7.popover.open("."+popoverSelector, "."+targetElSelector, true);
                     }catch(e){
-                        console.log(e);
+                        //console.log(e);
+                        Function.prototype();
                     }
                 }, POPOVER_DELAY);
             }else{
-                console.log("Error de ayuda, elemento no existe: "+targetElSelector);
+                //console.log("Error de ayuda, elemento no existe: "+targetElSelector);
                 //this.next();
                 this.finish();
             }

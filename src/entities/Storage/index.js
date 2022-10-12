@@ -1,6 +1,3 @@
-import { Storage } from '@capacitor/storage';
-import { Capacitor } from "@capacitor/core";
-
 const appname = "criollom";
 const version = "2.0";
 const versionKey = "criollom_version";
@@ -42,13 +39,50 @@ export const getData = key => {
     return storageRead(`${appname}_${version}_${key}`);
 };
 
-// Check data version
-const dataVersion = storageRead(versionKey);
-if(version !== dataVersion){
-    if(Capacitor.isNativePlatform()){
-        Storage.clear();
-    }else{
-        localStorage.clear();
+const checkVersion = () => {// Check data version
+    const dataVersion = storageRead(versionKey);
+    if(version !== dataVersion){
+        if(Capacitor.isNativePlatform()){
+            Storage.clear();
+        }else{
+            localStorage.clear();
+        }
+        storageWrite(versionKey, version);
     }
-    storageWrite(versionKey, version);
+};
+
+// El metodo getData es async, por lo que no se puede usar get() aqui
+// A modo de parche, se copia los datos de avt.storage a localStorage al inicio
+if(window.avt){
+    const avtTolocalStorage = k => {
+        const key = `${appname}_${version}_${k}`;
+        return new Promise((resolve, reject) => {
+            const userData = window.avt.generalData.getUserData();
+            const req = {ids:[userData.id], keys:[key]};
+            window.avt.storage.user.get(req)
+            .then(result => {   
+                let success = false;
+                if(result){
+                    if(result.info?.objects[userData.id]){
+                        if(result.info.objects[userData.id][key]){
+                            const data = result.info.objects[userData.id][key].data;
+                            localStorage.setItem(key, data);
+                            success = true;
+                        }
+                    }
+                }
+                if(!success)
+                    reject("AVT Read Err. (wrong format)");
+            })
+            .catch(reject);
+        });
+    };
+    Promise.all([
+        avtTolocalStorage(versionKey),         
+        avtTolocalStorage("reports")
+    ]).then(() => {
+        checkVersion();
+    });
+}else{
+    checkVersion();
 }
