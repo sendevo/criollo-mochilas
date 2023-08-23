@@ -1,3 +1,6 @@
+import { Capacitor } from "@capacitor/core";
+import { Preferences } from '@capacitor/preferences';
+
 const appname = "criollom";
 const version = "2.0";
 const versionKey = "criollom_version";
@@ -43,7 +46,7 @@ const checkVersion = () => {// Check data version
     const dataVersion = storageRead(versionKey);
     if(version !== dataVersion){
         if(Capacitor.isNativePlatform()){
-            Storage.clear();
+            Preferences.clear();
         }else{
             localStorage.clear();
         }

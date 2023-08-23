@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Criollo Mochilas</string>
+    <string name="title_activity_main">Criollo Mochilas</string>
+    <string name="package_name">com.inta.criollom</string>
+    <string name="custom_url_scheme">com.inta.criollom</string>
+</resources>

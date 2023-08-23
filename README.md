@@ -11,6 +11,9 @@ Criollo mochilas es una App para dispositivos móviles que brinda las herramient
   - Nueva presentación. Mejoras en control y validación de campos.  
   - El almacenamiento de los datos se realiza en Storage de Capacitor en el caso nativo, en avt.storage en el caso de la extensión Auravant o en localStorage en el caso web.  
 
+### Versión 2.1 [3] (Migración Capacitor 3 a 5. Compatibilidad con Android 13)
+ - Reemplazo de Storage por Preferences
+
 
 ## Instalación y despliegue
 
